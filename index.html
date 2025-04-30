@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Susu Ceengkudil</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="title.css">
+</head>
 
-    <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-    <title>Hello World!</title>
+<body>
+    <main>
+        <div class="bg-pattern"></div>
+        <section>
+            <h1 class="title">
+                <img src="https://cdn.glitch.global/a0353756-e7b1-4d06-b06b-ee0c529e6387/cengkudil.svg?v=1746004352982" alt="" class="title-1" draggable="false">
+                <div class="ani-vector">
+                    <!-- <span></span> -->
+                    <span></span>
+                </div>
+                <div class="pendulums">
+                    <div class="pendulum">
+                        <div class="bar"></div>
+                        <div class="motion">
+                            <div class="string"></div>
+                            <div class="weight"></div>
+                        </div>
+                    </div>
+                    <div class="pendulum shadow">
+                        <div class="bar"></div>
+                        <div class="motion">
+                            <div class="string"></div>
+                            <div class="weight"></div>
+                        </div>
+                    </div>
+                </div>
+            </h1>
+        </section>
 
-    <!-- The website stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+        <section class="countdown-container">
+            <h1 class="countdown-title">Kadaluarsa Dalam:</h1>
+            <div class="countdown">
+                <div class="time-box">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Jam</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Menit</div>
+                </div>
+                <div class="time-box">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Detik</div>
+                </div>
+            </div>
+            <ul>
+                <li id="dibuat-li">Dibuat: --</li>
+                <li id="kadaluarsa-li">Kadaluarsa: --</li>
+            </ul>
+        </section>
 
-    <!-- The website JavaScript file -->
-    <script src="/script.js" defer></script>
-  </head>
-  <body>
-    <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
-    <div class="wrapper">
-      <div class="content" role="main">
-        <h1 class="title">Hello World!</h1>
-        <img
-          src="https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2Fillustration.svg?v=1618177344016"
-          class="illustration"
-          alt="Editor illustration"
-          title="Click the image!"
-        />
-        <div class="instructions">
-          <h2>Using this project</h2>
-          <p>
-            This is the Glitch <strong>Hello Website</strong> project. You can
-            use it to build your own site. Check out the code in the editor and open
-            the <span class="fileopener" data-file="TODO.md" data-line="0"
-              >TODO</span> for next steps!
-          </p>
-          <!--  🚧 TODO: ADD BUTTON HERE -->
+        <!-- Input and button to set a new target time -->
+        <section class="input-container">
+            <input type="time" id="targetTimeInput">
+            <button id="setTimeButton">Set Countdown</button>
+        </section>
+<!-- 
+        <section class="countdown-container">
+            <h1 class="countdown-title">Riwayat Kadaluarsa</h1>
+        </section> -->
+    </main>
 
-          <!-- Once you've added the button from TODO.md, click it in the page -->
-          <!-- Check out the function in script.js to see how it works -->
-        </div>
-      </div>
-    </div>
-    <!-- The footer holds our remix button — you can keep or delete it ✂ -->
-    <footer class="footer">
-      <div class="links"></div>
-      <a
-        class="btn--remix"
-        target="_top"
-        href="https://glitch.com/edit/#!/remix/glitch-hello-website"
-      >
-        <img
-          src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140"
-          alt=""
-        />
-        Remix on Glitch
-      </a>
-    </footer>
-  </body>
+    <script src="main.js"></script>
+
+</body>
+
 </html>

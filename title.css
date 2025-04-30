@@ -1,0 +1,216 @@
+.title {
+    position: relative;
+    font-weight: 800;
+    -webkit-text-stroke: 2px var(--black);
+    color: var(--bg-normal);
+    text-shadow: 4px 4px 0 var(--font-color);
+    letter-spacing: 1px;
+    font-size: 44px;
+    margin: 0 auto 12px;
+    /* width: 200px; */
+    width: 230px;
+    user-select: none;
+}
+
+.title img {
+    display: inline-block;
+    width: 240px;
+    height: 52px;
+    padding: 0;
+    margin-left: -10px;
+}
+
+.ani-vector {
+    position: absolute;
+    left: -60px;
+    top: 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.ani-vector span {
+    -webkit-transform: rotateZ(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotateZ(45deg);
+    margin: 0 7px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--black);
+    background-color: var(--bg-submit);
+    display: inline-block;
+    border-radius: 1px;
+    -webkit-animation: zooming 8s ease-in-out infinite;
+    animation: zooming 8s ease-in-out infinite;
+}
+
+.ani-vector span:nth-child(2) {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+}
+
+@media only screen and (max-width: 768px) {
+    .ani-vector {
+        top: 24px;
+    }
+}
+
+.pendulums {
+    position: absolute;
+    width: 50px;
+    height: 72px;
+    right: -56px;
+    bottom: -2px;
+    -webkit-perspective: 640px;
+    perspective: 640px;
+}
+
+
+.pendulums {
+    position: absolute;
+    width: 50px;
+    height: 72px;
+    right: -56px;
+    bottom: -2px;
+    -webkit-perspective: 640px;
+    perspective: 640px;
+}
+
+.pendulum {
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    right: 44%;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateZ(-300px) translateX(-50%);
+    transform: translateZ(-300px) translateX(-50%);
+}
+
+.pendulum:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: var(--bg-submit);
+    position: absolute;
+    top: 2px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: 3px solid var(--black);
+}
+
+.pendulum.shadow {
+    display: none;
+    top: 263%;
+    left: -65%;
+    bottom: 0;
+    -webkit-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transform: translateX(-50%) scaleY(-1) scaleZ(2) rotateY(-30deg) rotateX(-75deg) translateZ(300px);
+    transform: translateX(-50%) scaleY(-1) scaleZ(2) rotateY(-30deg) rotateX(-75deg) translateZ(300px);
+}
+
+.pendulum .bar {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: -5px;
+    display: block;
+    width: 26px;
+    height: 30px;
+    background: #d0f4f0;
+    border: 3px solid #33322E;
+    border-radius: 15px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.pendulum .string {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 3px;
+    height: 72px;
+    background: var(--black);
+}
+
+.pendulum .weight {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 14px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f8d966;
+    border: 3px solid #33322E;
+}
+
+.pendulum .motion {
+    position: absolute;
+    height: 90px;
+    width: 50px;
+    -webkit-transform-origin: 50% 10px;
+    -ms-transform-origin: 50% 10px;
+    transform-origin: 50% 10px;
+    -webkit-animation: swing 1800ms infinite ease-in-out;
+    animation: swing 1800ms infinite ease-in-out;
+}
+
+.pendulum.shadow .bar,
+.pendulum.shadow .string,
+.pendulum.shadow .weight {
+    background: #3d3a34;
+}
+
+
+@-webkit-keyframes swing {
+    0% {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes swing {
+    0% {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+}
