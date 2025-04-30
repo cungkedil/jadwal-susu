@@ -65,18 +65,7 @@
     position: absolute;
     width: 50px;
     height: 72px;
-    right: -56px;
-    bottom: -2px;
-    -webkit-perspective: 640px;
-    perspective: 640px;
-}
-
-
-.pendulums {
-    position: absolute;
-    width: 50px;
-    height: 72px;
-    right: -56px;
+    right: -36px;
     bottom: -2px;
     -webkit-perspective: 640px;
     perspective: 640px;
