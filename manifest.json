@@ -4,7 +4,7 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "theme_color": "#e8f6ff",
   "icons": [
     {
       "src": "https://cdn.glitch.global/a0353756-e7b1-4d06-b06b-ee0c529e6387/icon-192.png?v=1746012860347",
