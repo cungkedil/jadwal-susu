@@ -1,4 +1,4 @@
-const API = 'http://localhost:8081/jadwal-susu';
+const API = 'https://susu-cengkudil-backend.glitch.me/jadwal-susu';
 let remainingMs = 0;
 let timerInterval = null;
 
