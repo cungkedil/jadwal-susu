@@ -88,6 +88,15 @@ body {
     flex-wrap: wrap;
 }
 
+.expired {
+    display: flex;
+    justify-content: center;
+    color: var(--deleted);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
 .time-box {
     background: var(--body-bg);
     padding: 1.5rem;
@@ -267,6 +276,10 @@ body {
 
     .countdown-title {
         font-size: 1.6rem;
+    }
+
+    .expired {
+        font-size: 1rem;
     }
 
     .time-box {

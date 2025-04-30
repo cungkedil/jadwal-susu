@@ -7,7 +7,7 @@ function renderCountdown(ms) {
     if (ms <= 0) {
         clearInterval(timerInterval);
         document.querySelector('.countdown')
-            .innerHTML = "<div class='expired'>TIME EXPIRED!</div>";
+            .innerHTML = "<div class='expired'>SUDAH KADALUARSA!</div>";
         return;
     }
     const totalSec = Math.floor(ms / 1000);
