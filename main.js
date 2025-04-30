@@ -2,6 +2,19 @@ const API = 'https://susu-cengkudil-backend.glitch.me/jadwal-susu';
 let remainingMs = 0;
 let timerInterval = null;
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("Service Worker registered with scope:", registration.scope);
+      })
+      .catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  });
+}
+
 // Render hours/mins/secs into the DOM
 function renderCountdown(ms) {
     if (ms <= 0) {
