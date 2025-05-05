@@ -1,8 +1,17 @@
+// service-worker.js
 self.addEventListener("install", (event) => {
-  console.log("Service worker installed.");
   event.waitUntil(
     caches.open("v1").then((cache) => {
-      return cache.addAll(["/", "/index.html", "/style.css", "/title.css", "/main.js"]);
+      return cache.addAll([
+        '/jadwal-susu/',
+        '/jadwal-susu/index.html',
+        '/jadwal-susu/style.css',
+        '/jadwal-susu/title.css',
+        '/jadwal-susu/main.js',
+        '/jadwal-susu/manifest.json',
+        '/jadwal-susu/icons/icon-192.png',
+        '/jadwal-susu/icons/icon-512.png'
+      ]);
     })
   );
 });
