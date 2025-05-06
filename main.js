@@ -38,9 +38,6 @@ function renderAdditionalInfo(target) {
     const formattedCreated = toAdditionalInfoString(createdDate);
     const formattedExpire = toAdditionalInfoString(expireDate);
 
-    console.log(formattedCreated);
-    console.log(formattedExpire);
-
     document.getElementById('dibuat-li').textContent = `Dibuat: ${formattedCreated}`;
     document.getElementById('kadaluarsa-li').textContent = `Kadaluarsa: ${formattedExpire}`;
 }
@@ -141,8 +138,6 @@ async function setNewTarget() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ target_time: payloadTime })
         });
-        console.log('Sent:', payloadTime);
-
         timeInput.value = '';
         initCountdown();
     } catch (err) {
