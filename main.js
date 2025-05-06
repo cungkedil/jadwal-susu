@@ -1,18 +1,14 @@
-const API = 'https://susu-cengkudil-backend.glitch.me/jadwal-susu';
+const API = 'https://ojkeitbmxtypouxiavjh.supabase.co/functions/v1/jadwal-susu';
 let remainingMs = 0;
 let timerInterval = null;
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("service-worker.js")
-      .then((registration) => {
-        console.log("Service Worker registered with scope:", registration.scope);
-      })
-      .catch((error) => {
-        console.error("Service Worker registration failed:", error);
-      });
-  });
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("service-worker.js")
+            .then((registration) => console.log("SW registered:", registration.scope))
+            .catch((err) => console.error("SW failed:", err));
+    });
 }
 
 // Render hours/mins/secs into the DOM
@@ -34,24 +30,23 @@ function renderCountdown(ms) {
 }
 
 function renderAdditionalInfo(target) {
-    const createdDate   = new Date(target);
-    const expireDate    = new Date(target);
+    const createdDate = new Date(target);
+    const expireDate = new Date(target);
 
     createdDate.setHours(createdDate.getHours() - 2);
-  
-    // format readable
+
     const formattedCreated = toAdditionalInfoString(createdDate);
-    const formattedExpire  = toAdditionalInfoString(expireDate);
-  
-    // write into <li> elements
-    document.getElementById('dibuat-li').textContent    = `Dibuat: ${formattedCreated}`;
+    const formattedExpire = toAdditionalInfoString(expireDate);
+
+    console.log(formattedCreated);
+    console.log(formattedExpire);
+
+    document.getElementById('dibuat-li').textContent = `Dibuat: ${formattedCreated}`;
     document.getElementById('kadaluarsa-li').textContent = `Kadaluarsa: ${formattedExpire}`;
-  }
-  
+}
 
 // Fetch target + server time, init remainingMs & start the interval
 async function initCountdown() {
-    // clear any old timer
     if (timerInterval) clearInterval(timerInterval);
 
     try {
@@ -66,14 +61,12 @@ async function initCountdown() {
         // compute difference based on server’s clock
         remainingMs = new Date(data.target_time) - new Date(data.server_time);
 
-        // initial render & then tick locally
         renderCountdown(remainingMs);
         timerInterval = setInterval(() => {
             remainingMs -= 1000;
             renderCountdown(remainingMs);
         }, 1000);
 
-        // render additional info timestamp
         renderAdditionalInfo(data.target_time);
 
     } catch (err) {
@@ -81,33 +74,47 @@ async function initCountdown() {
     }
 }
 
-// helper to format YYYY-MM-DDTHH:MM:SS (no timezone)
-function toLocalISOString(d) {
+// helper: format YYYY-MM-DDTHH:MM:SS with local offset (+07:00)
+function toOffsetISOString(d) {
+    // base date components
     const pad = n => String(n).padStart(2, '0');
-    return (
-        d.getFullYear() + '-' +
-        pad(d.getMonth() + 1) + '-' +
-        pad(d.getDate()) + 'T' +
-        pad(d.getHours()) + ':' +
-        pad(d.getMinutes()) + ':' +
-        pad(d.getSeconds())
-    );
+    const datePart = [
+        d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())
+    ].join('-');
+    const timePart = [
+        pad(d.getHours()), pad(d.getMinutes()), pad(d.getSeconds())
+    ].join(':');
+
+    // compute offset
+    const tzOffsetMin = -d.getTimezoneOffset();       // in minutes
+    const sign = tzOffsetMin >= 0 ? '+' : '-';
+    const absMin = Math.abs(tzOffsetMin);
+    const oh = pad(Math.floor(absMin / 60));
+    const om = pad(absMin % 60);
+
+    return `${datePart}T${timePart}${sign}${oh}:${om}`;
 }
 
 function toAdditionalInfoString(d) {
     const pad = n => String(n).padStart(2, '0');
-    return [
-      pad(d.getDate()),
-      pad(d.getMonth() + 1),
-      d.getFullYear()
-    ].join('-')
-    + ', ' +
-    [
-      pad(d.getHours()),
-      pad(d.getMinutes()),
-      pad(d.getSeconds())
+
+    // 1) Clone the date and subtract 7 hours (in milliseconds)
+    const shifted = new Date(d.getTime() - 7 * 60 * 60 * 1000);
+
+    // 2) Extract day/month/year and HH:MM:SS from the shifted date
+    const datePart = [
+        pad(shifted.getDate()),
+        pad(shifted.getMonth() + 1),
+        shifted.getFullYear()
+    ].join('-');
+
+    const timePart = [
+        pad(shifted.getHours()),
+        pad(shifted.getMinutes())
     ].join(':');
-  }
+
+    return `${timePart}, ${datePart}`;
+}
 
 // POST a new target, then re-initialize
 async function setNewTarget() {
@@ -117,18 +124,25 @@ async function setNewTarget() {
 
     const now = new Date();
     let [h, m] = timeValue.split(':').map(Number);
-    let newTarget = new Date(now.getFullYear(), now.getMonth(), now.getDate(), (h + 2), m, 0);
+    let newTarget = new Date(
+        now.getFullYear(), now.getMonth(), now.getDate(),
+        h + 2, m, 0
+    );
     if (newTarget.getTime() <= now.getTime()) {
         newTarget.setDate(newTarget.getDate() + 1);
     }
+
+    // build offset-ISO string
+    const payloadTime = toOffsetISOString(newTarget);
 
     try {
         await fetch(API, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ target_time: toLocalISOString(newTarget) })
+            body: JSON.stringify({ target_time: payloadTime })
         });
-        // once backend has stored it, fetch & restart countdown
+        console.log('Sent:', payloadTime);
+
         timeInput.value = '';
         initCountdown();
     } catch (err) {
