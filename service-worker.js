@@ -1,13 +1,13 @@
 const CACHE_NAME = 'v1';
 const ASSETS = [
   './',
-  './index.html',
-  './style.css',
-  './title.css',
-  './main.js',
-  './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  '/jadwal-susu/index.html',
+  '/jadwal-susu/style.css',
+  '/jadwal-susu/title.css',
+  '/jadwal-susu/main.js',
+  '/jadwal-susu/manifest.json',
+  '/jadwal-susu/icons/icon-192.png',
+  '/jadwal-susu/icons/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
